@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- link reset css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/grid.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+  <link rel="stylesheet" th:href="@{/assets/images/}">
+  <link rel="stylesheet" th:href="@{/assets/css/featured.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/detail.css}">
+
+  <!-- link gg fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Nanum+Myeongjo:wght@400;700;800&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+  <!-- link font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>News_Website</title>
+</head>
+<body>
+<div class="news-website">
+  <header class="header">
+    <div class="grid wide">
+      <div class="row">
+        <div class="col l-1">
+          <a th:href="@{/index}" class="logo">MMT</a>
+        </div>
+        <div class="col l-9 nav">
+          <nav class="nav__bar hide-on-mobile-tablet">
+            <ul class="nav__list">
+              <li class="nav__items"><a th:href="@{/index}" class="menu-link">Home</a></li>
+              <li class="nav__items">
+                <a th:href="@{/about}" class="menu-link">About Us</a>
+              </li>
+              <li class="nav__items" th:each="category : ${categoriess}" >
+                <a class="menu-link" th:href="@{/posts-in-category/{id}(id = ${category.id})}" th:text="${category.name}"></a>
+              </li>
+              <li class="nav__items">
+                <a href="#" class="menu-link">Images</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col l-2 m-8">
+
+          <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox">
+
+          <form class="search__box" th:action="@{'/search-results?pageNo=' + ${1}}" method="get">
+            <input class="search-txt" type="text" placeholder="Search" id="search" name="keyword">
+            <div class="search-btn" >
+              <button  type="submit" class="btn btn-primary">Find</button>
+            </div>
+          </form>
+
+          <input type="checkbox" hidden name="" class="nav__input"   id="nav-mobile-input">
+
+          <label for="nav-mobile-input" class="nav__overlay"></label>
+
+          <nav class="nav__bar__mobile ">
+            <label for="nav-mobile-input" class="nav__bar__mobile-close">
+              <i class="fa-solid fa-xmark"></i>
+            </label>
+            <ul class="nav__list__mobile">
+              <li class="nav__items"><a th:href="@{/index}" class="menu-link__mobile">Home</a></li>
+              <li class="nav__items">
+                <a th:href="@{/about}" class="menu-link__mobile">About Us</a>
+              </li>
+              <li class="nav__items" th:each="category : ${categoriess}" >
+                <a class="menu-link__mobile" th:href="@{/posts-in-category/{id}(id = ${category.id})}" th:text="${category.name}"></a>
+              </li>
+              <li class="nav__items">
+                <a href="#" class="menu-link__mobile">Images</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col l-0 m-1 header__tablet__mobile">
+          <label for="nav-mobile-input" class="nav__bar-btn">
+            <i class="fa-solid fa-bars"></i>
+          </label>
+
+          <label for="mobile-search-checkbox" class="header__mobile-search hide-on-tablet" >
+            <i class="header__mobile-search-icon fa-solid fa-magnifying-glass"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id="progress">
+      <i id="progress-value" class="fa-solid fa-arrow-up"></i>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="grid wide">
+      <div class="row">
+        <div class="col l-2 l-o-5 m-3 m-o-5">
+          <h1 class="menu-header" th:text="${category.name}">Featured</h1>
+        </div>
+        <div class="col l-12">
+          <div class="menu-divider"></div>
+        </div>
+      </div>
+      <div class="row page">
+        <div class="col l-12">
+            <div class="posts-in-category">
+              <div class="row">
+                <div class="col l-4 m-6" th:each="post : ${postsss}">
+                  <a class="home-featured__right-item" th:href="@{/find-post/{id}(id = ${post.id})}">
+                    <img class="home-featured__right-item-img"
+                         th:src="*{'data:image/jpeg;base64,' + post.image}" >
+                    </img>
+                    <div class="home-featured__right-item-content">
+                      <h4 class="home-featured__right-item-title" th:text="${post.name}">
+                        VR-controlled robots are being designed to treat injured soldiers
+                      </h4>
+                    </div>
+                    <span class="home-featured__right-item-time"  th:text="${post.time}">
+                      4 hours ago
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+<!--        <div class="col l-6">-->
+<!--          <a href="#" class="menu-top-left">-->
+<!--            <div class="menu-top-left__item-big-img" style="background-image: url(../assets/images/menu-top-left-img.webp);"></div>-->
+<!--            <h4 class="menu-top-left__item-big-title">-->
+<!--              ‘We will see spectacular failures’: Tech leaders and investors reckon with the end of cheap money-->
+<!--            </h4>-->
+<!--            <span class="menu-top-left__item-time">-->
+<!--                                16 min ago-->
+<!--                            </span>-->
+<!--          </a>-->
+<!--        </div>-->
+
+
+
+      </div>
+      <div class="row page-more-header">
+        <div class="col l-12 m-6">
+          <h1 class="menu-more-header" >Related News</h1>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col l-12">
+            <div class="menu-top-right">
+              <div class="row">
+                <div class="col l-3 m-6" th:each="postRelated : ${posts}">
+                  <a href="#" class="menu-top-left" th:href="@{/find-post/{id}(id = ${postRelated.id})}">
+                    <img class="menu-top-left__item-img" th:src="*{'data:image/jpeg;base64,' + postRelated.image}"></img>
+                    <h4 class="menu-top-left__item-title" th:text="${postRelated.name}">
+                      Musk tells Twitter employees they can still receive stock
+                    </h4>
+                    <span class="menu-top-left__item-time" th:text="${postRelated.time}">
+                      Nov 14th 2022
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+<!--      <div class="row load-more">-->
+<!--        <div class="col l-2 l-o-5">-->
+<!--          <a href="#" class="menu-load-more">-->
+<!--            <span class="load-more__name">LOAD MORE</span>-->
+<!--            <i class="fa-solid fa-chevron-down"></i>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </div>
+
+  <footer class="footer">
+
+  </footer>
+</div>
+
+<!--<script th:src="@{/layout/header.js}"></script>-->
+<script th:src="@{/layout/footer.js}"></script>
+<script th:src="@{/layout/script.js}" type="text/javascript"></script>
+
+</body>
+</html>

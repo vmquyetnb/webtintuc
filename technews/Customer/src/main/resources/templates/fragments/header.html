@@ -1,0 +1,40 @@
+<div class="grid wide" th:fragment="headers">
+    <div class="row">
+        <div class="col l-1">
+            <a href="/" class="logo">MMT</a>
+        </div>
+        <div class="col l-9 nav">
+            <nav class="nav__bar hide-on-mobile-tablet">
+                <ul class="nav__list">
+                    <li class="nav__items"><a th:href="@{/index}" class="menu-link">Home</a></li>
+                    <li class="nav__items">
+                        <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 1" th:href="@{/posts-in-category/{id}(id = ${category.id})}" >Review</a>
+                    </li>
+                    <li class="nav__items">
+                        <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 2" th:href="@{/posts-in-category/{id}(id = ${category.id})}">Gaming</a>
+                    </li>
+                    <li class="nav__items">
+                        <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 3" th:href="@{/posts-in-category/{id}(id = ${category.id})}">Tomorrow</a>
+                    </li>
+                    <li class="nav__items">
+                        <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 4" th:href="@{/posts-in-category/{id}(id = ${category.id})}">Featured</a>
+                    </li>
+                    <li class="nav__items">
+                        <a class="menu-link">Images</a>
+                    </li>
+                    <li class="nav__items">
+                        <a class="menu-link">About Us</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col l-2">
+            <div class="search__box">
+                <input class="search-txt" type="text" placeholder="Search">
+                <a href="#" class="search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

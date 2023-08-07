@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- link reset css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" th:href="@{./assets/css/base.css}">
+  <link rel="stylesheet" th:href="@{./assets/css/main.css}">
+  <link rel="stylesheet" th:href="@{./assets/css/grid.css}">
+  <link rel="stylesheet" th:href="@{./assets/css/responsive.css}">
+  <link rel="stylesheet" th:href="@{./assets/images/}">
+
+  <!-- link gg fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Nanum+Myeongjo:wght@400;700;800&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+  <!-- link font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>News_Website</title>
+
+</head>
+<body>
+<!--header-->
+<header class="header" th:fragment="header">
+  <div class="grid wide">
+    <div class="row">
+      <div class="col l-1">
+        <a href="/" class="logo">MMT</a>
+      </div>
+      <div class="col l-9 nav">
+        <nav class="nav__bar hide-on-mobile-tablet">
+          <ul class="nav__list">
+            <li class="nav__items"><a th:href="@{/index}" class="menu-link">Home</a></li>
+            <li class="nav__items">
+              <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 1" th:href="@{/posts-in-category/{id}(id = ${category.id})}" >Review</a>
+            </li>
+            <li class="nav__items">
+              <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 2" th:href="@{/posts-in-category/{id}(id = ${category.id})}">Gaming</a>
+            </li>
+            <li class="nav__items">
+              <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 3" th:href="@{/posts-in-category/{id}(id = ${category.id})}">Tomorrow</a>
+            </li>
+            <li class="nav__items">
+              <a class="menu-link" th:each="category : ${categories}" th:if="${category.id} == 4" th:href="@{/posts-in-category/{id}(id = ${category.id})}">Featured</a>
+            </li>
+            <li class="nav__items">
+              <a class="menu-link">Images</a>
+            </li>
+            <li class="nav__items">
+              <a class="menu-link">About Us</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col l-2">
+        <div class="search__box">
+          <input class="search-txt" type="text" placeholder="Search">
+          <a href="#" class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--script-->
+<!--<div th:fragment="script">-->
+<!--  <script th:src="@{../layout/header.js}"></script>-->
+<!--  <script th:src="@{../layout/footer.js}"></script>-->
+<!--</div>-->
+
+</body>
+</html>

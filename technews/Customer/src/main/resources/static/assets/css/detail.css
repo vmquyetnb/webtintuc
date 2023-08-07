@@ -1,0 +1,39 @@
+.page-container{
+    margin-top: 4rem;
+}
+
+.page-detail-title{
+    font-size: 5.4rem;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 5.5rem;
+    height: 16.5rem;
+    margin: 1rem 0;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    color: var(--title-color);
+    font-weight: 800;
+}
+
+.page-detail-time{
+    color: var(--time-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.page-detail-info{
+    color: var(--page-detail-info-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.8rem;
+    letter-spacing: 0.1rem;
+}
+
+.page-detail-des{
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 3rem;
+    letter-spacing: 0.06rem;
+}

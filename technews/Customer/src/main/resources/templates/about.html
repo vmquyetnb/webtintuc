@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- link reset css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/grid.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+  <link rel="stylesheet" th:href="@{/assets/images/}">
+  <link rel="stylesheet" th:href="@{/assets/css/featured.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/detail.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/about.css}">
+
+  <!-- link gg fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Nanum+Myeongjo:wght@400;700;800&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+  <!-- link font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>News_Website</title>
+</head>
+<body>
+<div class="news-website">
+  <header class="header">
+    <div class="grid wide">
+      <div class="row">
+        <div class="col l-1">
+          <a th:href="@{/index}" class="logo">MMT</a>
+        </div>
+        <div class="col l-9 nav">
+          <nav class="nav__bar hide-on-mobile-tablet">
+            <ul class="nav__list">
+              <li class="nav__items"><a th:href="@{/index}" class="menu-link">Home</a></li>
+              <li class="nav__items">
+                <a th:href="@{/about}" class="menu-link">About Us</a>
+              </li>
+              <li class="nav__items" th:each="category : ${categoriess}" >
+                <a class="menu-link" th:href="@{/posts-in-category/{id}(id = ${category.id})}" th:text="${category.name}"></a>
+              </li>
+              <li class="nav__items">
+                <a href="#" class="menu-link">Images</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col l-2 m-8">
+
+          <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox">
+
+          <form class="search__box" th:action="@{'/search-results?pageNo=' + ${1}}" method="get">
+            <input class="search-txt" type="text" placeholder="Search" id="search" name="keyword">
+            <div class="search-btn" >
+              <button  type="submit" class="btn btn-primary">Find</button>
+            </div>
+          </form>
+
+          <input type="checkbox" hidden name="" class="nav__input"   id="nav-mobile-input">
+
+          <label for="nav-mobile-input" class="nav__overlay"></label>
+
+          <nav class="nav__bar__mobile ">
+            <label for="nav-mobile-input" class="nav__bar__mobile-close">
+              <i class="fa-solid fa-xmark"></i>
+            </label>
+            <ul class="nav__list__mobile">
+              <li class="nav__items"><a th:href="@{/index}" class="menu-link__mobile">Home</a></li>
+              <li class="nav__items">
+                <a th:href="@{/about}" class="menu-link__mobile">About Us</a>
+              </li>
+              <li class="nav__items" th:each="category : ${categoriess}" >
+                <a class="menu-link__mobile" th:href="@{/posts-in-category/{id}(id = ${category.id})}" th:text="${category.name}"></a>
+              </li>
+              <li class="nav__items">
+                <a href="#" class="menu-link__mobile">Images</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col l-0 m-1 header__tablet__mobile">
+          <label for="nav-mobile-input" class="nav__bar-btn">
+            <i class="fa-solid fa-bars"></i>
+          </label>
+
+          <label for="mobile-search-checkbox" class="header__mobile-search hide-on-tablet" >
+            <i class="header__mobile-search-icon fa-solid fa-magnifying-glass"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id="progress">
+      <i id="progress-value" class="fa-solid fa-arrow-up"></i>
+    </div>
+  </header>
+
+  <div class="container-about">
+    <video autoplay loop muted plays-inline th:src="@{/assets/images/universe.mp4}"
+           class="background-video" type="video/mp4">
+    </video>
+
+    <div class="about-title">
+      <h1>About us</h1>
+    </div>
+
+    <div class="about-mission">
+      <div class="grid wide">
+        <div class="row">
+          <div class="col l-7 m-12 container-img">
+            <img class="about-img" th:src="@{/assets/images/about-img.jpg}"></img>
+          </div>
+          <div class="col l-5 m-12 container-des">
+            <h1>MMT is one of the best tech news network on the planet</h1>
+            <p>Our mission is to help the influential and aspirational to make astute decisions to get ahead.
+              With international headquarters in VietNam and NewYork, we provide you with the perfect 24-hour global technology briefing.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l-5 m-12 container-des">
+            <h1>MMT Office Tour</h1>
+            <p>The MMT Office Tour offers visitors a behind-the-scenes look at MMT where the people work hard together every single day. Take a look back at MMT’s history-making coverage of news events that have shaped the world and get a peek at state-of-the-art studios where these events are reported daily to over one billion people worldwide.
+            </p>
+          </div>
+          <div class="col l-7 m-12 container-img">
+            <img class="about-img" th:src="@{/assets/images/about-office-work-2.jpg}"></img>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l-5 m-0 container-img">
+            <img class="container-img__end" th:src="@{/assets/images/about-gif-2.gif}" alt="gif">
+          </div>
+          <div class="col l-7 m-0 container-des container-end">
+            <h1 class="intro">You're at the end of the our introduction</h1>
+            <h2 class="intro">Thank's for visiting us</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+
+  </footer>
+</div>
+
+<!--<script th:src="@{/layout/header.js}"></script>-->
+<script th:src="@{/layout/footer.js}"></script>
+<script th:src="@{/script.js}" type="text/javascript"></script>
+<script th:src="@{/layout/script.js}" type="text/javascript"></script>
+
+</body>
+</html>

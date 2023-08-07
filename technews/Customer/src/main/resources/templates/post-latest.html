@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- link reset css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/base.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/grid.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+    <link rel="stylesheet" th:href="@{/assets/images/}">
+    <link rel="stylesheet" th:href="@{/assets/css/featured.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/detail.css}">
+
+
+    <!-- Required meta tags -->
+    <!-- Bootstrap CSS -->
+
+    <!-- link gg fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Merriweather:wght@400;700&family=Montserrat:wght@300&family=Nanum+Myeongjo:wght@400;700;800&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <!-- link font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>News_Website</title>
+</head>
+<body>
+<div class="news-website">
+    <header class="header">
+        <div class="grid wide">
+            <div class="row">
+                <div class="col l-1">
+                    <a th:href="@{/index}" class="logo">MMT</a>
+                </div>
+                <div class="col l-9 nav">
+                    <nav class="nav__bar hide-on-mobile-tablet">
+                        <ul class="nav__list">
+                            <li class="nav__items"><a th:href="@{/index}" class="menu-link">Home</a></li>
+                            <li class="nav__items">
+                                <a th:href="@{/about}" class="menu-link">About Us</a>
+                            </li>
+                            <li class="nav__items" th:each="category : ${categoriess}" >
+                                <a class="menu-link" th:href="@{/posts-in-category/{id}(id = ${category.id})}" th:text="${category.name}"></a>
+                            </li>
+                            <li class="nav__items">
+                                <a href="#" class="menu-link">Images</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col l-2 m-8">
+
+                    <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox">
+
+                    <form class="search__box" th:action="@{'/search-results?pageNo=' + ${1}}" method="get">
+                        <input class="search-txt" type="text" placeholder="Search" id="search" name="keyword">
+                        <div class="search-btn" >
+                            <button  type="submit" class="btn btn-primary">Find</button>
+                        </div>
+                    </form>
+
+                    <input type="checkbox" hidden name="" class="nav__input"   id="nav-mobile-input">
+
+                    <label for="nav-mobile-input" class="nav__overlay"></label>
+
+                    <nav class="nav__bar__mobile ">
+                        <label for="nav-mobile-input" class="nav__bar__mobile-close">
+                            <i class="fa-solid fa-xmark"></i>
+                        </label>
+                        <ul class="nav__list__mobile">
+                            <li class="nav__items"><a th:href="@{/index}" class="menu-link__mobile">Home</a></li>
+                            <li class="nav__items">
+                                <a th:href="@{/about}" class="menu-link__mobile">About Us</a>
+                            </li>
+                            <li class="nav__items" th:each="category : ${categoriess}" >
+                                <a class="menu-link__mobile" th:href="@{/posts-in-category/{id}(id = ${category.id})}" th:text="${category.name}"></a>
+                            </li>
+                            <li class="nav__items">
+                                <a href="#" class="menu-link__mobile">Images</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col l-0 m-1 header__tablet__mobile">
+                    <label for="nav-mobile-input" class="nav__bar-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </label>
+
+                    <label for="mobile-search-checkbox" class="header__mobile-search hide-on-tablet" >
+                        <i class="header__mobile-search-icon fa-solid fa-magnifying-glass"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="progress">
+            <i id="progress-value" class="fa-solid fa-arrow-up"></i>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grid wide">
+            <div class="row third__part">
+                <div class="col l-9">
+                    <span class="label">
+                        The Latest
+                    </span>
+                    <div class="home-latest">
+                        <div class="row">
+                            <div class="col l-12" th:each="postIndex:${posts}">
+                                <div class="home-latest-item">
+                                    <a class="home-latest-item-img-click" th:href="@{/find-post/{id}(id = ${postIndex.id})}">
+                                        <img class="home-latest-item-img" th:src="*{'data:image/jpeg;base64,' + postIndex.image}" >
+                                        </img>
+                                    </a>
+                                    <div class="home-latest-item-content">
+                                        <a class="home-latest-item-title" th:text="${postIndex.name}" th:href="@{/find-post/{id}(id = ${postIndex.id})}" >
+                                            The best teach toys and gifts for kids in 2022
+                                        </a>
+                                        <span class="home-latest-item-time" th:text="${postIndex.time}">
+                                                20 hours ago
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row load-more-home">
+                <div class="col l-4 l-o-3 m-8 m-o-2">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li th:if="${currentPageHome != 0}" class="page-item">
+                                <a th:href="@{'/page-index?page=' + ${currentPageHome - 1}}" class="page-link" href="#" >Previous</a>
+                            </li>
+                            <li th:each="i : ${#numbers.sequence(1, totalPagesHome)}" th:classappend="${currentPageHome == i - 1  ? 'active' : ''}" class="page-item page-item__active">
+                                <a th:href="@{'/page-index?page=' + ${i}}" class="page-link" href="#" ><span th:text="${i}"></span></a>
+                            </li>
+                            <li th:if="${currentPageHome + 1 != totalPagesHome}" class="page-item">
+                                <a th:href="@{'/page-index?page=' + ${currentPageHome + 1 }}" class="page-link" href="#" >Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="grid wide">
+            <div class="row">
+                <a href="#" class="footer-logo">MMT</a>
+            </div>
+            <div class="row">
+                <div class="col l-4">
+                    <h5 class="footer-heading">Subscribe us</h5>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-brands fa-facebook"></i>
+                                Facebook
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-brands fa-linkedin"></i>
+                                Linkedin
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-brands fa-instagram"></i>
+                                Instagram
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-brands fa-twitter"></i>
+                                Twitter
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-brands fa-youtube"></i>
+                                Youtube
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col l-4">
+                    <h5 class="footer-heading">About us</h5>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">License</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">About MMT</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Help</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col l-4">
+                    <h5 class="footer-heading">Contact us</h5>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-solid fa-location-dot"></i>
+                                55, Giai Phong Street, Hai Ba Trung District, Ha Noi
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-solid fa-phone"></i>
+                                0666888999
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-solid fa-envelope"></i>
+                                mmtmht2@gmail.com
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">
+                                <i class="fa-solid fa-earth-americas"></i>
+                                www.mmtnews.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l-4 l-o-5">
+                    <p class="footer-privacy">© 2022 MMT Company. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script th:src="@{/layout/header.js}"></script>
+<script th:src="@{/layout/footer.js}"></script>
+<script th:src="@{/layout/script.js}" type="text/javascript"></script>
+
+<!--bootstrap script-->
+
+</body>
+</html>

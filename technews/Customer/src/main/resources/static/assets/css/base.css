@@ -1,0 +1,310 @@
+:root{
+    --white-color:#fff;
+    --black-color:#000;
+    --text-color: #2d3748;
+    --background-color: #f4f4f5;
+    --time-color: #6b6d70;
+    --title-color: #2b2d32;
+    --title-color-hover: #3867d6;
+    --header-background-color: #005594;
+    --menu-hover-color: #fcb700;
+    --label-color: #002f6c;
+    --footer-background-color: #071d39;
+    --page-detail-info-color: #171717;
+}
+html{
+    font-size: 62.5%;
+    font-family: 'Dosis', sans-serif;
+    scroll-behavior: smooth;
+}
+*{
+    box-sizing: border-box;
+}
+
+
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* scroll-top */
+#progress {
+    position: fixed;
+    right: 15px;
+    bottom: 50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    place-items: center;
+    background-color: var(--header-background-color);
+    display: none;
+    cursor: pointer;
+    z-index: 99;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* display: none; */
+    /* transition: all .5s ease */
+}
+
+#progress-value {
+    display: block;
+    height: 4.5rem;
+    width: 4.5rem;
+    background-color: white;
+    color: var(--header-background-color);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size:20px;
+
+}
+
+#progress-value :hover {
+    color:var(--menu-hover-color)
+}
+
+/* menu-page */
+
+.menu-header{
+    font-family: 'Dosis', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 3rem;
+    text-align: center;
+    color: var(--label-color);
+    letter-spacing: 0.1rem;
+}
+
+.menu-divider{
+    background-color: var(--menu-hover-color);
+    height: 6px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.menu-top-left{
+    padding-bottom: 4rem;
+    display: block;
+    text-decoration: none;
+}
+
+.page{
+    margin-top: 6px;
+}
+
+.menu-top-left__item-big-img{
+    height: 405px;
+    width: 588px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.menu-top-left__item-big-title{
+    font-size: 4.2rem;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 5rem;
+    height: 15rem;
+    margin: 1rem 0;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    color: var(--title-color);
+}
+
+.menu-top-left__item-big-title:hover{
+    color: var(--title-color-hover);
+}
+
+/* .menu-top-right{
+
+} */
+
+.menu-top-left__item-img{
+    height: 195px;
+    width: 282px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.menu-top-left__item-title{
+    font-size: 2rem;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 3rem;
+    height: 6rem;
+    margin: 1rem 0;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: var(--title-color);
+}
+
+.menu-top-left__item-title:hover{
+    color: var(--title-color-hover);
+}
+
+.menu-top-left__item-time{
+    color: var(--time-color);
+    font-size: 1.4rem;
+}
+
+
+.menu-more-header{
+    font-family: 'Dosis', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 3rem;
+    color: var(--label-color);
+    letter-spacing: 0.1rem;
+}
+
+.page-more-header{
+    position: relative;
+}
+
+.page-more-header::before{
+    content: "";
+    position: absolute;
+    width: 97.9%;
+    height: 1px;
+    left: 1%;
+    background-color: #7e838f;
+}
+
+.load-more{
+    padding: 3rem 0;
+}
+
+.load-more-home{
+    padding: 3rem 0;
+}
+
+.menu-load-more{
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid var(--label-color);
+    border-color: var(--label-color);
+    color: var(--label-color);
+    border-radius: 2rem;
+}
+
+.menu-load-more:hover{
+    background-color: var(--label-color);
+    color: var(--white-color);
+}
+
+
+/* detail-page */
+.page-detail-img{
+    display: block;
+    margin: 0 auto;
+    /* width: 100%; */
+    width: 792px;
+    height: 445px;
+    object-fit: cover;
+}
+
+
+/*pagination*/
+
+.pagination{
+    display:flex;
+    padding-left:0;
+    list-style:none;
+    border-radius:.35rem}
+
+.page-link{
+    position:relative;
+    padding:.5rem .75rem;
+    line-height:3rem;
+    color: var(--header-background-color);
+    background-color:#fff;
+    border:1px solid #dddfeb;
+    text-decoration: none;
+    font-size: 2rem;
+    height: 3rem;
+    text-align: center;
+}
+
+.page-link:hover{
+    z-index:2;
+    color:#224abe;
+    text-decoration:none;
+    background-color:#eaecf4;
+    border-color:#dddfeb}
+
+.page-link:focus{
+    z-index:3;
+    outline:0;
+    box-shadow:0 0 0 .2rem rgba(78,115,223,.25)}
+
+.page-item:first-child .page-link{
+    margin-left:0;
+    border-top-left-radius:.35rem;
+    border-bottom-left-radius:.35rem}
+
+.page-item:last-child .page-link{
+    border-top-right-radius:.35rem;
+    border-bottom-right-radius:.35rem}
+
+.page-item.active .page-link{
+    z-index:3;
+    color:#fff;
+    background-color: var(--header-background-color);
+    border-color: var(--header-background-color)}
+
+.page-item.disabled .page-link{
+    color:#858796;
+    pointer-events:none;
+    cursor:auto;
+    background-color:#fff;
+    border-color:#dddfeb}
+
+.pagination-lg .page-link{
+    padding:.75rem 1.5rem;
+    font-size:1.25rem;
+    line-height:1.5}
+
+.pagination-lg .page-item:first-child .page-link{
+    border-top-left-radius:.3rem;
+    border-bottom-left-radius:.3rem}
+
+/*.pagination{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    list-style: none;*/
+/*}*/
+
+/*.page-item{*/
+/*    margin: 0 8px;*/
+/*}*/
+
+/*.page-link {*/
+/*    --height: 3rem;*/
+/*    display: block;*/
+/*    text-decoration: none;*/
+/*    font-size: 2rem;*/
+/*    color: var(--title-color);*/
+/*    min-width: 4rem;*/
+/*    height: var(--height);*/
+/*    line-height: var(--height);*/
+/*    text-align: center;*/
+/*    border-radius: 2px;*/
+/*}*/
+
+/*.page-item__active .page-link:current{*/
+/*    color: var(--white-color);*/
+/*    background-color: var(--header-background-color);*/
+/*}*/
+
+/*.page-item__active .page-link:hover{*/
+/*    color: var(--menu-hover-color);*/
+/*}*/

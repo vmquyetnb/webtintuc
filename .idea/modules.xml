@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/technews/Admin/Admin.iml" filepath="$PROJECT_DIR$/technews/Admin/Admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/technews/Customer/Customer.iml" filepath="$PROJECT_DIR$/technews/Customer/Customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/technews/Library/Library.iml" filepath="$PROJECT_DIR$/technews/Library/Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tech-main.iml" filepath="$PROJECT_DIR$/.idea/tech-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/technews/technews.iml" filepath="$PROJECT_DIR$/technews/technews.iml" />
+    </modules>
+  </component>
+</project>
